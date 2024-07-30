@@ -13,7 +13,7 @@
             background-color: #f5f8fb;
         }
         header {
-            background-color:#eef4fc;
+            background-color: #eef4fc;
             padding: 15px 50px;
             display: flex;
             justify-content: space-between;
@@ -191,9 +191,9 @@
                 <h3>Question #2</h3>
                 <label for="experience">How many years of experience do you have?</label>
                 <select id="experience" name="experience">
-                    <option value="0-5 years">0 to 5 years</option>
-                    <option value="5-10 years">5 to 10 years</option>
-                    <option value="10+ years">10+ years</option>
+                    <option value="0-5 yrs">0-5 years</option>
+                    <option value="5-10 yrs">5-10 years</option>
+                    <option value="10+ yrs">10+ years</option>
                 </select>
                 <div>
                     <button type="button" class="btn-back" onclick="prevStep(1)">Back</button>
@@ -251,14 +251,13 @@
                 <h3>Here's what we suggest.</h3>
                 <p id="course-recommendation">Here are the best suited programs based on your responses.</p>
                 <div id="recommended-courses"></div>
-                </div>
             </div>
         </div>
     </main>
     <script>
         const courses = {
             "EdgeUp": {
-                description: "Interview Kickstart’s EdgeUp Program is a unique course designed to equip you with Generative AI skills relevant to your domain and job role AND prepare you for interviews at top tech companies. You will not only gain the skills required to stay relevant in today’s AI-drien techworld, but also be ready to ace interviews to land your dream job.",
+                description: "Interview Kickstart’s EdgeUp Program is a unique course designed to equip you with Generative AI skills relevant to your domain and job role AND prepare you for interviews at top tech companies. You will not only gain the skills required to stay relevant in today’s AI-driven tech world, but also be ready to ace interviews to land your dream job.",
                 link: "https://www.interviewkickstart.com/courses/edgeup"
             },
             "ML SwitchUp": {
@@ -311,75 +310,109 @@
             nextStep(6);
         }
 
-        function determineCourse(role, experience, duration, futureGoal) {
-            // Defining courses
+        function determineCourse(role, yoe, duration, future_goal) {
             const ml_courses = ["EdgeUp", "ML Flagship Course", "DS SwitchUp", "ML SwitchUp"];
             const genai_courses = ["Advanced Gen AI", "Applied Gen AI"];
 
-            // Mapping for ML courses based on future_goal
-            const ml_mapping = {
-                "3a": ml_courses,
-                "3b": ml_courses,
-                "3e": ["EdgeUp"],
-                "3f": ["EdgeUp", "ML Flagship Course", "DS SwitchUp"]
-            };
-
-            // Mapping for GenAI courses based on future_goal
-            const genai_mapping = {
-                "3c": ["Applied Gen AI"],
-                "3d": ["Applied Gen AI"]
-            };
-
-            // Define role-specific logic
-            if (["Technical Program Manager", "Product Manager (Tech)", "Engineering Manager"].includes(role)) {
-                if (ml_mapping[futureGoal]) {
-                    if (duration === "3-6 months") {
-                        if (["0-5 years", "5-10 years", "10+ years"].includes(experience)) {
-                            return ml_mapping[futureGoal][0];
-                        }
-                    } else if (duration === "6-9 months") {
-                        if (["0-5 years", "5-10 years"].includes(experience)) {
-                            return ml_mapping[futureGoal][1];
-                        } else if (experience === "10+ years") {
-                            return ml_mapping[futureGoal][0];
-                        }
-                    } else if (duration === "12 months") {
-                        if (["0-5 years", "5-10 years"].includes(experience)) {
-                            return ml_mapping[futureGoal][1];
-                        } else if (experience === "10+ years") {
-                            return ml_mapping[futureGoal][2];
-                        }
-                    }
-                } else if (genai_mapping[futureGoal]) {
-                    if (duration === "12 months" && experience === "5-10 years") {
-                        return "EdgeUp";
-                    }
-                    return genai_mapping[futureGoal][0];
+            if (role === "Technical Program Manager" || role === "Product Manager (Tech)") {
+                if (future_goal === "3a" || future_goal === "3b") {
+                    if (duration === "3-6 months") return "EdgeUp";
+                    if (duration === "6-9 months") return yoe === "10+ yrs" ? "EdgeUp" : "ML Flagship Course";
+                    if (duration === "12 months") return yoe === "10+ yrs" ? "DS SwitchUp" : "ML Flagship Course";
+                }
+                if (future_goal === "3c") return (duration === "12 months" && yoe === "5-10 yrs") ? "EdgeUp" : "Applied Gen AI";
+                if (future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") {
+                    if (duration === "3-6 months") return "EdgeUp";
+                    if (duration === "6-9 months") return "ML Flagship Course";
+                    if (duration === "12 months") return "DS SwitchUp";
                 }
             }
 
-            // Additional role-specific logic for other roles
-            if (["Backend Engineering", "Fullstack Engineering", "Frontend Engineering", "Data Engineering", "Data Analyst & Business Analyst", "Test Engineering", "Mobile Engineering (iOS/Android)", "Embedded Systems", "Data Science", "Machine Learning", "Site Reliability Engineering", "Security Engineering", "AWS Cloud Solutions Architect"].includes(role)) {
-                if (ml_mapping[futureGoal]) {
-                    if (duration === "3-6 months") {
-                        if (["0-5 years", "5-10 years", "10+ years"].includes(experience)) {
-                            return ml_mapping[futureGoal][0];
-                        }
-                    } else if (duration === "6-9 months") {
-                        if (["0-5 years", "5-10 years", "10+ years"].includes(experience)) {
-                            return ml_mapping[futureGoal][1];
-                        }
-                    } else if (duration === "12 months") {
-                        if (["0-5 years", "5-10 years", "10+ years"].includes(experience)) {
-                            return ml_mapping[futureGoal][2];
-                        }
-                    }
-                } else if (genai_mapping[futureGoal]) {
-                    return genai_mapping[futureGoal][0];
+            if (role === "Engineering Manager") {
+                if (future_goal === "3a") {
+                    if (duration === "3-6 months") return "EdgeUp";
+                    if (duration === "6-9 months") return yoe === "10+ yrs" ? "EdgeUp" : "ML Flagship Course";
+                    if (duration === "12 months") return yoe === "10+ yrs" ? "DS SwitchUp" : "ML SwitchUp";
+                }
+                if (future_goal === "3b") return "ML Flagship Course";
+                if (future_goal === "3c") return (duration === "12 months" && yoe === "5-10 yrs") ? "EdgeUp" : "Applied Gen AI";
+                if (future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") {
+                    if (duration === "3-6 months") return "EdgeUp";
+                    if (duration === "6-9 months") return "ML Flagship Course";
+                    if (duration === "12 months") return "DS SwitchUp";
                 }
             }
 
-            // Default recommendation for miscellaneous roles or unhandled cases
+            if (role === "Test Engineering") {
+                if (future_goal === "3a") return duration === "12 months" ? "DS SwitchUp" : "ML Flagship Course";
+                if (future_goal === "3b") {
+                    if (duration === "3-6 months") return "EdgeUp";
+                    if (duration === "6-9 months" || duration === "12 months") return "ML Flagship Course";
+                }
+                if (future_goal === "3c" || future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") return duration === "12 months" ? "DS SwitchUp" : "ML Flagship Course";
+            }
+
+            if (role === "AWS Cloud Solutions Architect") {
+                if (future_goal === "3a" || future_goal === "3b") return duration === "12 months" ? "ML SwitchUp" : "ML Flagship Course";
+                if (future_goal === "3c" || future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") return duration === "12 months" ? "DS SwitchUp" : "ML Flagship Course";
+            }
+
+            if (role === "Site Reliability Engineering") {
+                if (future_goal === "3a" || future_goal === "3b") return duration === "12 months" ? "ML SwitchUp" : "ML Flagship Course";
+                if (future_goal === "3c" || future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") return duration === "12 months" ? "DS SwitchUp" : "ML Flagship Course";
+            }
+
+            if (role === "Security Engineering") {
+                if (future_goal === "3a" || future_goal === "3b") return duration === "12 months" ? "ML SwitchUp" : "ML Flagship Course";
+                if (future_goal === "3c" || future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") return duration === "12 months" ? "DS SwitchUp" : "ML Flagship Course";
+            }
+
+            if (role === "Mobile Engineering (iOS/Android)") {
+                if (future_goal === "3a" || future_goal === "3b") return duration === "12 months" ? "ML SwitchUp" : "ML Flagship Course";
+                if (future_goal === "3c" || future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") return duration === "12 months" ? "DS SwitchUp" : "ML Flagship Course";
+            }
+
+            if (role === "Embedded Systems") {
+                if (future_goal === "3a" || future_goal === "3b") return duration === "12 months" ? "ML SwitchUp" : "ML Flagship Course";
+                if (future_goal === "3c" || future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") return duration === "12 months" ? "DS SwitchUp" : "ML Flagship Course";
+            }
+
+            if (role === "Data Science") {
+                if (future_goal === "3a") return "EdgeUp";
+                if (future_goal === "3b") return duration === "3-6 months" ? "ML SwitchUp" : "EdgeUp";
+                if (future_goal === "3c") return "Advanced Gen AI";
+                if (future_goal === "3d" || future_goal === "3e" || future_goal === "3f") return "EdgeUp";
+            }
+
+            if (role === "Machine Learning") {
+                if (future_goal === "3a" || future_goal === "3b") return "EdgeUp";
+                if (future_goal === "3c") return "Advanced Gen AI";
+                if (future_goal === "3d" || future_goal === "3e" || future_goal === "3f") return "EdgeUp";
+            }
+
+            if (["Backend Engineering", "Fullstack Engineering", "Frontend Engineering", "Data Engineering", "Data Analyst & Business Analyst", "Test Engineering", "Mobile Engineering (iOS/Android)", "Embedded Systems", "Site Reliability Engineering", "Security Engineering", "AWS Cloud Solutions Architect"].includes(role)) {
+                if (future_goal === "3a" || future_goal === "3b") return duration === "12 months" ? "ML SwitchUp" : "ML Flagship Course";
+                if (future_goal === "3c" || future_goal === "3d") return "Applied Gen AI";
+                if (future_goal === "3e") return "EdgeUp";
+                if (future_goal === "3f") return duration === "12 months" ? "DS SwitchUp" : "ML Flagship Course";
+            }
+
             return "Applied Gen AI";
         }
 
@@ -402,3 +435,4 @@
     </script>
 </body>
 </html>
+
