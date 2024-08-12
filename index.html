@@ -227,7 +227,7 @@
                 <div class="options-container">
                     <div class="option" data-value="3a" onclick="selectOption(this)">With a 1 Year Long Program - Transition to MLE roles with industry-relevant skills and hands-on projects</div>
                     <div class="option" data-value="3b" onclick="selectOption(this)">With a 6 Month Program - Transition to MLE roles with industry-relevant skills and hands-on projects</div>
-                                        <div class="option" data-value="3c" onclick="selectOption(this)">Specialisation for professionals already working in the AI/ML domain (Gen AI, MLOPs, NLP, CV)</div>
+                                        <div class="option" data-value="3c" onclick="selectOption(this)">Specialisation for professionals already working in the AI/ML domain (Gen AI, MLOps, NLP, CV)</div>
                     <div class="option" data-value="3d" onclick="selectOption(this)">Understand GenAI principles customized for domains (SWEs, PM, TPM, EM and so on)</div>
                     <div class="option" data-value="3e" onclick="selectOption(this)">Understand GenAI principles customized for domains and transition to FAANG+ companies</div>
                     <div class="option" data-value="3f" onclick="selectOption(this)">Transition to Data Science/Data Analyst roles with a focus on data analysis</div>
@@ -270,9 +270,11 @@
             <!-- Step 6 -->
             <div class="step" id="step-6">
                 <h2>Best Suited</h2>
-                <h3>Here's what we suggest.</h3>
+                <h3>Given your current future career goal, here is the course that we recommend, the timeline for this course is 12 months:</h3>
                 <p id="course-recommendation">Here are the best suited programs based on your responses.</p>
                 <div id="recommended-courses"></div>
+                <h3>To fit your current timeline, we recommend this course:</h3>
+                <div id="alternative-courses"></div>
                 <button type="button" onclick="restartQuiz()">Back to Recommendation Tool</button>
             </div>
         </div>
@@ -345,6 +347,7 @@
 
         function determineCourse(role, yoe, duration, future_goal) {
             const recommendations = [];
+            const alternatives = [];
 
             const addRecommendation = (course) => {
                 if (!recommendations.includes(course)) {
@@ -352,95 +355,96 @@
                 }
             };
 
+            const addAlternative = (course) => {
+                if (!alternatives.includes(course)) {
+                    alternatives.push(course);
+                }
+            };
+
             if (role === "Technical Program Manager" || role === "Product Manager (Tech)") {
                 if (future_goal === "3a") {
+                    addRecommendation("Advanced ML SwitchUp");
                     if (duration === "3-6 months") {
-                        addRecommendation("EdgeUp");
-                        addRecommendation("ML Flagship Course");
+                        addAlternative("ML Flagship Course");
+                    } else if (duration === "6-9 months") {
+                        if (["10+ yrs", "10-15 yrs", "15-20 yrs", "20+ yrs"].includes(yoe)) {
+                            addAlternative("EdgeUp");
+                        } else {
+                            addAlternative("ML Flagship Course");
+                        }
+                    } else if (duration === "12 months") {
+                        addAlternative("DS SwitchUp");
+                    }
+                } else if (future_goal === "3b") {
+                    if (duration === "3-6 months") {
+                                                addRecommendation("ML Flagship Course");
                     } else if (duration === "6-9 months") {
                         if (["10+ yrs", "10-15 yrs", "15-20 yrs", "20+ yrs"].includes(yoe)) {
                             addRecommendation("EdgeUp");
-                            addRecommendation("ML Flagship Course");
                         } else {
                             addRecommendation("ML Flagship Course");
-                            addRecommendation("DS SwitchUp");
                         }
                     } else if (duration === "12 months") {
                         addRecommendation("Advanced ML SwitchUp");
-                        addRecommendation("DS SwitchUp");
-                    }
-                } else if (future_goal === "3b") {
-                    if (duration === "3-6 months") {
-                        addRecommendation("EdgeUp");
-                        addRecommendation("ML Flagship Course");
-                    } else if (duration === "6-9 months") {
-                        if (["10+ yrs", "10-15 yrs", "15-20 yrs", "20+ yrs"]                        .includes(yoe)) {
-                            addRecommendation("EdgeUp");
-                            addRecommendation("ML Flagship Course");
-                        } else {
-                            addRecommendation("ML Flagship Course");
-                            addRecommendation("DS SwitchUp");
-                        }
-                    } else if (duration === "12 months") {
-                        addRecommendation("Advanced ML SwitchUp");
-                        addRecommendation("DS SwitchUp");
+                        addAlternative("DS SwitchUp");
                     }
                 } else if (future_goal === "3c") {
-                    addRecommendation("Applied Gen AI");
-                    addRecommendation("EdgeUp");
-                } else if (future_goal === "3d") {
-                    addRecommendation("Applied Gen AI");
-                } else if (future_goal === "3e") {
-                    addRecommendation("EdgeUp");
-                } else if (future_goal === "3f") {
-                    if (duration === "3-6 months") {
-                        addRecommendation("EdgeUp");
-                    } else if (duration === "6-9 months") {
-                        addRecommendation("ML Flagship Course");
+                    addRecommendation("Advanced Gen AI");
+                    if (duration === "3-6 months" || duration === "6-9 months") {
+                        addAlternative("ML Flagship Course");
                     } else if (duration === "12 months") {
-                        addRecommendation("DS SwitchUp");
-                    }
-                }
-            }
-
-            // Repeat similar logic for other roles as provided in the original code.
-            // Here's an example for Engineering Manager
-
-            if (role === "Engineering Manager") {
-                if (future_goal === "3a") {
-                    addRecommendation("EdgeUp");
-                    if (duration === "3-6 months") {
-                        addRecommendation("ML Flagship Course");
-                    } else if (duration === "6-9 months") {
-                        addRecommendation("ML Flagship Course");
-                        addRecommendation("DS SwitchUp");
-                    } else if (duration === "12 months") {
-                        addRecommendation("Advanced ML SwitchUp");
-                        addRecommendation("DS SwitchUp");
-                    }
-                } else if (future_goal === "3b") {
-                    addRecommendation("ML Flagship Course");
-                } else if (future_goal === "3c") {
-                    addRecommendation("Applied Gen AI");
-                    if (duration === "12 months") {
-                        addRecommendation("EdgeUp");
+                        addAlternative("Advanced ML SwitchUp");
                     }
                 } else if (future_goal === "3d") {
                     addRecommendation("Applied Gen AI");
-                } else if (future_goal === "3e") {
-                    addRecommendation("EdgeUp");
-                } else if (future_goal === "3f") {
-                    addRecommendation("EdgeUp");
                     if (duration === "6-9 months") {
-                        addRecommendation("ML Flagship Course");
+                        addAlternative("EdgeUp");
                     } else if (duration === "12 months") {
-                        addRecommendation("DS SwitchUp");
+                        addAlternative("DS SwitchUp");
+                    }
+                } else if (future_goal === "3e") {
+                    addRecommendation("EdgeUp");
+                } else if (future_goal === "3f") {
+                    addRecommendation("DS SwitchUp");
+                    if (duration === "3-6 months") {
+                        addAlternative("ML Flagship Course");
                     }
                 }
             }
 
-            // Add similar blocks for other roles based on the original Python logic
-            // ...
+            if (role === "Engineering Manager" || role === "Data Engineering" || role === "Data Science" || role === "Machine Learning/Deep Learning" || role === "Software Engineering (Frontend, Fullstack, Backend, Test)" || role === "STEM Background" || role === "Tech Consultants/IT Consultants") {
+                if (yoe === "20+ yrs") {
+                    addRecommendation("EdgeUp");
+                } else if (future_goal === "3a" || future_goal === "3b") {
+                    addRecommendation("Advanced ML SwitchUp");
+                    if (duration === "3-6 months") {
+                        addAlternative("ML Flagship Course");
+                    } else if (duration === "6-9 months") {
+                        addAlternative("EdgeUp");
+                    } else if (duration === "12 months") {
+                        addAlternative("DS SwitchUp");
+                    }
+                } else if (future_goal === "3c") {
+                    addRecommendation("Advanced Gen AI");
+                    if (duration === "3-6 months" || duration === "6-9 months") {
+                        addAlternative("ML Flagship Course");
+                    }
+                } else if (future_goal === "3d") {
+                    addRecommendation("Applied Gen AI");
+                    if (duration === "6-9 months") {
+                        addAlternative("EdgeUp");
+                    } else if (duration === "12 months") {
+                        addAlternative("DS SwitchUp");
+                    }
+                } else if (future_goal === "3e") {
+                    addRecommendation("EdgeUp");
+                } else if (future_goal === "3f") {
+                    addRecommendation("DS SwitchUp");
+                    if (duration === "3-6 months") {
+                        addAlternative("ML Flagship Course");
+                    }
+                }
+            }
 
             // Default recommendation for miscellaneous roles or unhandled cases
             if (recommendations.length === 0) {
@@ -448,33 +452,53 @@
                     addRecommendation("EdgeUp");
                 } else if (duration === "6-9 months") {
                     addRecommendation("ML Flagship Course");
-                    addRecommendation("DS SwitchUp");
+                    addAlternative("DS SwitchUp");
                 } else if (duration === "12 months") {
                     addRecommendation("Advanced ML SwitchUp");
-                    addRecommendation("DS SwitchUp");
+                    addAlternative("DS SwitchUp");
                 }
             }
 
-            return recommendations;
+            return { recommendations, alternatives };
         }
 
-        function displayRecommendation(recommendations) {
+        function displayRecommendation({ recommendations, alternatives }) {
             const recommendedCoursesDiv = document.getElementById('recommended-courses');
+            const alternativeCoursesDiv = document.getElementById('alternative-courses');
             recommendedCoursesDiv.innerHTML = '';
+            alternativeCoursesDiv.innerHTML = '';
 
-            recommendations.forEach(course => {
-                const courseDetails = courses[course];
-                if (courseDetails) {
-                    const courseElement = document.createElement('div');
-                    courseElement.classList.add('program');
-                    courseElement.innerHTML = `
-                        <h4>${course}</h4>
-                        <p>${courseDetails.description}</p>
-                        <button onclick="window.open('${courseDetails.link}', '_blank')">View Course</button>
-                    `;
-                    recommendedCoursesDiv.appendChild(courseElement);
-                }
-            });
+            if (recommendations.length > 0) {
+                recommendations.forEach(course => {
+                    const courseDetails = courses[course];
+                    if (courseDetails) {
+                        const courseElement = document.createElement('div');
+                        courseElement.classList.add('program');
+                        courseElement.innerHTML = `
+                            <h4>${course}</h4>
+                            <p>${courseDetails.description}</p>
+                            <button onclick="window.open('${courseDetails.link}', '_blank')">View Course</button>
+                        `;
+                        recommendedCoursesDiv.appendChild(courseElement);
+                    }
+                });
+            }
+
+            if (alternatives.length > 0) {
+                alternatives.forEach(course => {
+                    const courseDetails = courses[course];
+                    if (courseDetails) {
+                        const courseElement = document.createElement('div');
+                        courseElement.classList.add('program');
+                        courseElement.innerHTML = `
+                            <h4>${course}</h4>
+                            <p>${courseDetails.description}</p>
+                            <button onclick="window.open('${courseDetails.link}', '_blank')">View Course</button>
+                        `;
+                        alternativeCoursesDiv.appendChild(courseElement);
+                    }
+                });
+            }
         }
 
         function restartQuiz() {
