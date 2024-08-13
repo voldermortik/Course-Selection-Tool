@@ -227,8 +227,8 @@
                 <div class="options-container">
                     <div class="option" data-value="3a" onclick="selectOption(this)">With a 1 Year Long Program - Transition to MLE roles with industry-relevant skills and hands-on projects</div>
                     <div class="option" data-value="3b" onclick="selectOption(this)">With a 6 Month Program - Transition to MLE roles with industry-relevant skills and hands-on projects</div>
-                    <div class="option" data-value="3c" onclick="selectOption(this)">Specialisation for professionals already working in the AI/ML domain (Gen AI, MLOPs,NLP, CV)</div>
-                    <div class="option" data-value="3d" onclick="selectOption(this)">Understand GenAI principles customized for domains (SWEs, PM, TPM, EM and so on)</div>
+                    <div class="option" data-value="3c" onclick="selectOption(this)">Specialization for professionals already working in the AI/ML domain (Gen AI, MLOPs, NLP, CV)</div>
+                    <div class="option" data-value="3d" onclick="selectOption(this)">Understand GenAI principles customized for domains (SWEs, PM, TPM, EM, and so on)</div>
                     <div class="option" data-value="3e" onclick="selectOption(this)">Understand GenAI principles customized for domains and transition to FAANG+ companies</div>
                     <div class="option" data-value="3f" onclick="selectOption(this)">Transition to Data Science/Data Analyst roles with a focus on data analysis</div>
                 </div>
@@ -355,8 +355,6 @@
             if (yoe === "20+ yrs") {
                 addRecommendation("EdgeUp");
             } else {
-                // Logic for different roles and conditions
-
                 if (role === "Machine Learning/Deep Learning" || role === "Software Engineering (Frontend, Fullstack, Backend, Test)" || role === "STEM Background" || role === "Tech Consultants/IT Consultants") {
                     if (future_goal === "3a") {
                         addRecommendation("Advanced ML");
@@ -376,21 +374,12 @@
                 if (role === "Data Engineering") {
                     if (future_goal === "3d" && yoe === "10-15 yrs" && duration === "6-9 months") {
                         addRecommendation("Applied Gen AI");
-                    }
-                }
-
-                // Additional conditions and role-based logic...
-                                // Additional conditions and role-based logic...
-
-                if (role === "Data Engineering") {
-                    if (future_goal === "3a") {
+                    } else if (future_goal === "3a") {
                         addRecommendation("Advanced ML");
                     } else if (future_goal === "3b") {
                         addRecommendation("ML Flagship Course");
                     } else if (future_goal === "3c") {
                         addRecommendation("Advanced Gen AI");
-                    } else if (future_goal === "3d" && yoe === "10-15 yrs" && duration === "6-9 months") {
-                        addRecommendation("Applied Gen AI");
                     } else if (future_goal === "3e") {
                         addRecommendation("EdgeUp");
                     } else if (future_goal === "3f") {
@@ -444,7 +433,41 @@
                     }
                 }
 
-                // Additional roles and their specific logic...
+                if (role === "AWS Cloud Solutions Architect" || role === "Engineering Manager" || role === "Mobile Engineering (iOS/Android)") {
+                    if (future_goal === "3a") {
+                        addRecommendation("Advanced ML");
+                    } else if (future_goal === "3b") {
+                        addRecommendation("ML Flagship Course");
+                    } else if (future_goal === "3c") {
+                        addRecommendation("Advanced Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp");
+                    }
+                }
+
+                if (role === "CRM/ERP Developer" || role === "Cyber Security/Security Engineering" || role === "Site Reliability Engineering" || role === "Technical Program Manager" || role === "Embedded Systems") {
+                    if (yoe > 15) {
+                        addRecommendation("EdgeUp");
+                    } else {
+                        if (future_goal === "3a") {
+                            addRecommendation("DS SwitchUp");
+                        } else if (future_goal === "3b") {
+                            addRecommendation("ML Flagship Course");
+                        } else if (future_goal === "3c") {
+                            addRecommendation("Advanced Gen AI");
+                        } else if (future_goal === "3d") {
+                            addRecommendation("Applied Gen AI");
+                        } else if (future_goal === "3e") {
+                            addRecommendation("EdgeUp");
+                        } else if (future_goal === "3f") {
+                            addRecommendation("DS SwitchUp");
+                        }
+                    }
+                }
 
                 if (recommendations.length === 0) {
                     if (duration === "3-6 months") {
@@ -467,11 +490,11 @@
             recommendedCoursesDiv.innerHTML = '';
 
             const timeline = {
-                "EdgeUp": "3-6 months or 6-9 months",
+                "EdgeUp": "3-6 months",
                 "Advanced ML": "12 months",
                 "ML Flagship Course": "6-9 months",
-                "Advanced Gen AI": "3-6 months or 6-9 months (requires ML/DL experience)",
-                "Applied Gen AI": "3-6 months or 6-9 months",
+                "Advanced Gen AI": "6-9 months",
+                "Applied Gen AI": "6-9 months",
                 "DS SwitchUp": "12 months"
             };
 
@@ -510,5 +533,3 @@
     </script>
 </body>
 </html>
-
-
