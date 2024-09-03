@@ -358,7 +358,7 @@
             if (yoe === "20+ yrs") {
                 addRecommendation("EdgeUp");
             } else {
-                if (role === "Machine Learning/Deep Learning" || role === "Software Engineering (Frontend, Fullstack, Backend, Test)" || role === "STEM Background") {
+                if (role === "Software Engineering (Frontend, Fullstack, Backend, Test)" || role === "STEM Background") {
                     if (future_goal === "3a") {
                         addRecommendation("ML Flagship Course", "Advanced ML");
                     } else if (future_goal === "3b") {
@@ -371,6 +371,22 @@
                         addRecommendation("EdgeUp", "Advanced ML");
                     } else if (future_goal === "3f") {
                         addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                }
+
+                if (role === "Machine Learning/Deep Learning" || "Data Science") {
+                    if (future_goal === "3a") {
+                        addRecommendation("EdgeUp", "Advanced ML");
+                    } else if (future_goal === "3b") {
+                        addRecommendation("EdgeUp", "Advanced ML");
+                    } else if (future_goal === "3c") {
+                        addRecommendation("Advanced Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Advanced Gen AI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "Advanced ML");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("EdgeUp");
                     }
                 }
 
@@ -390,12 +406,46 @@
                     }
                 }
 
-                if (role === "Technical Program Manager" || role === "Product Manager (Tech)") {
+                if (role === "Data Analyst & Business Analyst") {
                     if (future_goal === "3a" || future_goal === "3b") {
                         if (duration === "3-6 months") {
-                            addRecommendation("EdgeUp", "Advanced ML");
+                            addRecommendation("ML Flagship", "DS SwitchUp");
                         } else if (duration === "6-9 months") {
-                            if (yoe === "10+ yrs") {
+                            if (yoe === "15+ yrs") {
+                                addRecommendation("ML Flagship", "DS SwitchUp");
+                            } else {
+                                addRecommendation("ML Flagship", "DS SwitchUp");
+                            }
+                        } else if (duration === "12 months") {
+                            addRecommendation("DS SwitchUp", "ML Flagship Course");
+                        }
+                    } else if (future_goal === "3c") {
+                        if (duration === "12 months" && yoe === "5-10 yrs") {
+                            addRecommendation("EdgeUp", "ML Flagship Course");
+                        } else {
+                            addRecommendation("Applied Gen AI");
+                        }
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI", "EdgeUp");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "ML Flagship Course");
+                    } else if (future_goal === "3f") {
+                        if (duration === "3-6 months") {
+                            addRecommendation("EdgeUp", "ML Flagship Course");
+                        } else if (duration === "6-9 months") {
+                            addRecommendation("ML Flagship Course", "DS SwitchUp");
+                                                } else if (duration === "12 months") {
+                            addRecommendation("DS SwitchUp", "EdgeUp");
+                        }
+                    }
+                }
+
+                if (role === "Technical Program Manager" || role === "Product Manager (Tech)" || role === "Engineering Manager") {
+                    if (future_goal === "3a" || future_goal === "3b") {
+                        if (duration === "3-6 months") {
+                            addRecommendation("ML Flagship", "Advanced ML");
+                        } else if (duration === "6-9 months") {
+                            if (yoe === "15+ yrs") {
                                 addRecommendation("EdgeUp", "Advanced ML");
                             } else {
                                 addRecommendation("ML Flagship Course", "Advanced ML");
@@ -407,15 +457,15 @@
                         if (duration === "12 months" && yoe === "5-10 yrs") {
                             addRecommendation("EdgeUp", "ML Flagship Course");
                         } else {
-                            addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                            addRecommendation("Applied Gen AI");
                         }
                     } else if (future_goal === "3d") {
-                        addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                        addRecommendation("Applied Gen AI", "EdgeUp");
                     } else if (future_goal === "3e") {
-                        addRecommendation("EdgeUp", "Advanced ML");
+                        addRecommendation("EdgeUp", "ML Flagship Course");
                     } else if (future_goal === "3f") {
                         if (duration === "3-6 months") {
-                            addRecommendation("EdgeUp", "Advanced ML");
+                            addRecommendation("EdgeUp", "ML Flagship Course");
                         } else if (duration === "6-9 months") {
                             addRecommendation("ML Flagship Course", "Advanced ML");
                                                 } else if (duration === "12 months") {
@@ -424,7 +474,7 @@
                     }
                 }
 
-                if (role === "AWS Cloud Solutions Architect" || role === "Engineering Manager" || role === "Mobile Engineering (iOS/Android)" || role === "Tech Consultants/IT Consultants") {
+                if (role === "AWS Cloud Solutions Architect" || role === "Mobile Engineering (iOS/Android)" || role === "Tech Consultants/IT Consultants") {
                     if (future_goal === "3a" || future_goal === "3b") {
                         addRecommendation("ML Flagship Course", "Advanced ML");
                     } else if (future_goal === "3c") {
@@ -438,7 +488,7 @@
                     }
                 }
 
-                if (role === "CRM/ERP Developer" || role === "Cyber Security/Security Engineering" || role === "Site Reliability Engineering" || role === "Technical Program Manager" || role === "Embedded Systems") {
+                if (role === "CRM/ERP Developer" || role === "Cyber Security/Security Engineering" || role === "Site Reliability Engineering" || role === "Embedded Systems") {
                     if (yoe > 15) {
                         addRecommendation("EdgeUp");
                     } else {
