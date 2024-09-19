@@ -190,6 +190,7 @@
                     <option value="Data Engineering">Data Engineering</option>
                     <option value="Data Science">Data Science</option>
                     <option value="Embedded Systems">Embedded Systems</option>
+                    <option value="Embedded Systems">Functional Consultants</option>
                     <option value="Engineering Manager">Engineering Manager</option>
                     <option value="Machine Learning/Deep Learning">Machine Learning/Deep Learning</option>
                     <option value="Mobile Engineering (iOS/Android)">Mobile Engineering (iOS/Android)</option>
@@ -358,7 +359,7 @@
             if (yoe === "20+ yrs") {
                 addRecommendation("EdgeUp");
             } else {
-                if (role === "Software Engineering (Frontend, Fullstack, Backend, Test)" || role === "STEM Background") {
+                if (role === "Software Engineering (Frontend, Fullstack, Backend, Test)") {
                     if (future_goal === "3a") {
                         addRecommendation("ML Flagship Course", "Advanced ML");
                     } else if (future_goal === "3b") {
@@ -442,7 +443,7 @@
                     }
                 }
 
-                if (role === "AWS Cloud Solutions Architect" || role === "Mobile Engineering (iOS/Android)" || role === "Tech Consultants/IT Consultants") {
+                if (role === "AWS Cloud Solutions Architect" || role === "Mobile Engineering (iOS/Android)") {
                     if (future_goal === "3a" || future_goal === "3b") {
                         addRecommendation("ML Flagship Course", "Advanced ML");
                     } else if (future_goal === "3c") {
@@ -456,7 +457,7 @@
                     }
                 }
 
-                if (role === "CRM/ERP Developer" || role === "Cyber Security/Security Engineering" || role === "Site Reliability Engineering" || role === "Embedded Systems") {
+                if (role === "Cyber Security/Security Engineering" || role === "Site Reliability Engineering" || role === "Embedded Systems") {
                     if (yoe > 15) {
                         addRecommendation("EdgeUp");
                     } else {
@@ -475,6 +476,46 @@
                         }
                     }
                 }
+
+                if (role === "CRM/ERP Developer" || role === "STEM Background"  || role === "Tech Consultants/IT Consultants") {
+                    if (yoe > 10) {
+                        addRecommendation("Applied GenAI");
+                    } else {
+                        if (future_goal === "3a") {
+                            addRecommendation("ML Flagship Course","DS SwitchUp");
+                        } else if (future_goal === "3b") {
+                            addRecommendation("ML Flagship Course","DS SwitchUp");
+                        } else if (future_goal === "3c") {
+                            addRecommendation("Applied Gen AI");
+                        } else if (future_goal === "3d") {
+                            addRecommendation("Applied Gen AI");
+                        } else if (future_goal === "3e") {
+                            addRecommendation("Applied GenAI");
+                        } else if (future_goal === "3f") {
+                            addRecommendation("DS SwitchUp", "Applied GenAI");
+                        }
+                    }
+                }
+
+            if (role === "Functional Consultants") {
+                if (yoe > 5) {
+                    addRecommendation("Applied GenAI");
+                } else {
+                    if (future_goal === "3a") {
+                        addRecommendation("ML Flagship Course","DS SwitchUp");
+                    } else if (future_goal === "3b") {
+                        addRecommendation("ML Flagship Course","DS SwitchUp");
+                    } else if (future_goal === "3c") {
+                        addRecommendation("Applied Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("Applied GenAI");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "Applied GenAI");
+                    }
+                }
+            }
 
                 if (recommendations.length === 0) {
                     if (duration === "3-6 months") {
