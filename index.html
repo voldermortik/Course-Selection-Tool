@@ -125,24 +125,6 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .other-programs {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 30px;
-        }
-        .other-program {
-            background-color: #e9f2fd;
-            width: 30%;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-        }
-        .other-program h4 {
-            margin: 0 0 10px 0;
-        }
-        .other-program p {
-            margin: 0;
-        }
         .options-container {
             display: flex;
             flex-direction: column;
@@ -190,13 +172,14 @@
                     <option value="Data Engineering">Data Engineering</option>
                     <option value="Data Science">Data Science</option>
                     <option value="Embedded Systems">Embedded Systems</option>
-                    <option value="Embedded Systems">Functional Consultants</option>
+                    <option value="Functional Consultants">Functional Consultants</option>
                     <option value="Engineering Manager">Engineering Manager</option>
                     <option value="Machine Learning/Deep Learning">Machine Learning/Deep Learning</option>
                     <option value="Mobile Engineering (iOS/Android)">Mobile Engineering (iOS/Android)</option>
                     <option value="Product Manager (Tech)">Product Manager (Tech)</option>
                     <option value="Site Reliability Engineering">Site Reliability Engineering</option>
                     <option value="Software Engineering (Frontend, Fullstack, Backend, Test)">Software Engineering (Frontend, Fullstack, Backend, Test)</option>
+                    <option value="Other Software Engineers">Other Software Engineers</option>
                     <option value="STEM Background">STEM Background</option>
                     <option value="Tech Consultants/IT Consultants">Tech Consultants/IT Consultants</option>
                     <option value="Technical Program Manager">Technical Program Manager</option>
@@ -227,7 +210,6 @@
                 <label for="future-goal">What are your future goals?</label>
                 <div class="options-container">
                     <div class="option" data-value="3a" onclick="selectOption(this)">Transition to MLE roles with industry-relevant skills and hands-on projects</div>
-                    <!--<div class="option" data-value="3b" onclick="selectOption(this)">With a 6 Month Program - Transition to MLE roles with industry-relevant skills and hands-on projects</div>-->
                     <div class="option" data-value="3c" onclick="selectOption(this)">Specialization for professionals already working in the AI/ML domain (Gen AI, MLOPs, NLP, CV)</div>
                     <div class="option" data-value="3d" onclick="selectOption(this)">Understand GenAI principles customized for domains (SWEs, PM, TPM, EM, and so on)</div>
                     <div class="option" data-value="3e" onclick="selectOption(this)">Understand GenAI principles customized for domains and transition to FAANG+ companies</div>
@@ -261,7 +243,7 @@
                 <input type="text" id="name" name="name" placeholder="Name">
                 <label for="email">Email ID</label>
                 <input type="email" id="email" name="email" placeholder="abc@xyz.com">
-                                <label for="number">Number</label>
+                <label for="number">Number</label>
                 <input type="number" id="number" name="number" placeholder="0000000000">
                 <div>
                     <button type="button" class="btn-back" onclick="prevStep(4)">Back</button>
@@ -278,6 +260,7 @@
             </div>
         </div>
     </main>
+
     <script>
         const courses = {
             "EdgeUp": {
@@ -285,7 +268,7 @@
                 link: "https://www.interviewkickstart.com/courses/edgeup"
             },
             "Advanced ML": {
-                description: "Unlock your potential with our Advanced ML course, tailored for professionals eager to transition into Applied ML/ML engineering roles. Whether you're a great coder or someone with a passion for machine learning, this comprehensive curriculum covers everything from foundational python and data structures to advanced ML algorithms and architectures like Transformers and LLMs paired with MLOps and Deployments on AWS Servers. Gain practical experience through hands-on assignments, guided by industry experts and academic leaders. Complete your journey with a unique FAANG-mentored capstone project, readying you to implement ML-backed solutions and excel in your new career as an ML Engineer.",
+                description: "Unlock your potential with our Advanced ML course, tailored for professionals eager to transition into Applied ML/ML engineering roles. Gain practical experience through hands-on assignments, guided by industry experts and academic leaders.",
                 link: "https://www.interviewkickstart.com/courses/machine-learning-course"
             },
             "ML Flagship Course": {
@@ -293,15 +276,15 @@
                 link: "https://www.interviewkickstart.com/courses/flagship-machine-learning-course"
             },
             "Advanced Gen AI": {
-                description: "The Advanced Generative AI course has been developed collaboratively with FAANG+ instructors who work on cutting-edge Generative AI technology in their respective organizations. This direct involvement enriches the curriculum and benefits participants to access real-world applications of concepts, case studies, and best practices. The course begins with building a solid foundation for Generative AI through comprehensive sessions on Deep Learning Primers and Neural Architectures.",
+                description: "The Advanced Generative AI course has been developed collaboratively with FAANG+ instructors who work on cutting-edge Generative AI technology in their respective organizations. This direct involvement enriches the curriculum and benefits participants to access real-world applications of concepts, case studies, and best practices.",
                 link: "https://www.interviewkickstart.com/courses/advanced-genai-program"
             },
-            "Applied Gen AI": {
-                description: "Applied GenAI is designed to cut through the complexity and open the door to the world of AI for a broader audience. It’s for those who seek to understand and apply generative AI principles without becoming ML experts. By focusing on the practical application, key concepts, and strategic understanding necessary for leveraging AI in various domains, this course empowers learners to innovate and make informed decisions in the age of AI.",
+            "Applied GenAI": {
+                description: "Applied GenAI is designed to cut through the complexity and open the door to the world of AI for a broader audience. It focuses on practical applications, key concepts, and strategic understanding necessary for leveraging AI in various domains.",
                 link: "https://www.interviewkickstart.com/courses/applied-genai"
             },
             "DS SwitchUp": {
-                description: "The DS SwitchUp program is perfect for professionals from non-technical fields, STEM graduates aiming to become data scientists. It covers essential Python and SQL skills, advanced data structures, algorithms, and machine learning techniques. With hands-on assignments, diverse expert instructors, and a FAANG-mentored capstone project, you'll gain practical experience and transition seamlessly into data science roles.",
+                description: "The DS SwitchUp program is perfect for professionals from non-technical fields or STEM graduates aiming to become data scientists. It covers essential Python, SQL skills, advanced data structures, algorithms, and machine learning techniques.",
                 link: "https://www.interviewkickstart.com/courses/data-science-course"
             }
         };
@@ -335,11 +318,16 @@
             const experience = document.getElementById('experience').value;
             const futureGoal = document.getElementById('future-goal').value;
             const duration = document.getElementById('duration').value;
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const number = document.getElementById('number').value;
+
+            // Debugging
+            console.log("Role: ", role);
+            console.log("Experience: ", experience);
+            console.log("Future Goal: ", futureGoal);
+            console.log("Duration: ", duration);
 
             const recommendations = determineCourse(role, experience, duration, futureGoal);
+            console.log("Recommendations: ", recommendations);
+
             displayRecommendation(recommendations, duration);
             nextStep(6);
         }
@@ -356,36 +344,55 @@
                 }
             };
 
-            if (yoe === "20+ yrs") {
+            //console.log("Entering determineCourse with: ", { role, yoe, duration, future_goal });
+
+            if (yoe === "20+ yrs" && role !== "CRM/ERP Developer" && role !== "STEM Background" && role !== "Tech Consultants/IT Consultants" && role !== "Functional Consultants") {
                 addRecommendation("EdgeUp");
             } else {
-                if (role === "Software Engineering (Frontend, Fullstack, Backend, Test)") {
-                    if (future_goal === "3a") {
-                        addRecommendation("ML Flagship Course", "Advanced ML");
-                    } else if (future_goal === "3b") {
-                        addRecommendation("ML Flagship Course", "Advanced ML");
-                    } else if (future_goal === "3c") {
-                        addRecommendation("Advanced Gen AI", "Applied Gen AI");
+
+                if (role === "Software Engineering (Frontend, Fullstack, Backend, Test)" || role ==="Other Software Engineers") 
+                {
+                    if (yoe === "0-5 yrs" || yoe === "5-10 yrs") 
+                    {
+                    
+                    if (future_goal === "3a"){
+                        addRecommendation("Advanced ML", "ML Flagship Course");} 
+                    else if (future_goal === "3c"){
+                        addRecommendation("Applied GenAI");
                     } else if (future_goal === "3d") {
-                        addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                        addRecommendation("Applied GenAI");
                     } else if (future_goal === "3e") {
                         addRecommendation("EdgeUp", "Advanced ML");
                     } else if (future_goal === "3f") {
                         addRecommendation("DS SwitchUp", "EdgeUp");
                     }
+                    } 
+                    else if (yoe === "10-15 yrs" || yoe === "15-20 yrs")
+                    { 
+                    if (future_goal === "3a") {
+                        addRecommendation("ML Flagship Course", "Advanced ML");
+                    } else if (future_goal === "3c") {
+                        addRecommendation("Applied GenAI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied GenAI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "Advanced ML");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                    
+                    }
                 }
 
-                if (role === "Machine Learning/Deep Learning" || "Data Science") {
+                if (role === "Machine Learning/Deep Learning" || role === "Data Science") {
                     if (future_goal === "3a") {
-                        addRecommendation("EdgeUp", "Advanced ML");
-                    } else if (future_goal === "3b") {
-                        addRecommendation("EdgeUp", "Advanced ML");
+                        addRecommendation("EdgeUp");
                     } else if (future_goal === "3c") {
                         addRecommendation("Advanced Gen AI");
                     } else if (future_goal === "3d") {
                         addRecommendation("Advanced Gen AI");
                     } else if (future_goal === "3e") {
-                        addRecommendation("EdgeUp", "Advanced ML");
+                        addRecommendation("EdgeUp");
                     } else if (future_goal === "3f") {
                         addRecommendation("EdgeUp");
                     }
@@ -393,13 +400,13 @@
 
                 if (role === "Data Engineering") {
                     if (future_goal === "3d" && yoe === "10-15 yrs" && duration === "6-9 months") {
-                        addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                        addRecommendation("Applied GenAI", "Advanced Gen AI");
                     } else if (future_goal === "3a") {
                         addRecommendation("ML Flagship Course", "Advanced ML");
                     } else if (future_goal === "3b") {
                         addRecommendation("ML Flagship Course", "Advanced ML");
                     } else if (future_goal === "3c") {
-                        addRecommendation("Advanced Gen AI", "Applied Gen AI");
+                        addRecommendation("Advanced Gen AI", "Applied GenAI");
                     } else if (future_goal === "3e") {
                         addRecommendation("EdgeUp", "Advanced ML");
                     } else if (future_goal === "3f") {
@@ -407,17 +414,118 @@
                     }
                 }
 
+                if (role === "Data Engineering") 
+                {
+                    if (yoe === "0-5 yrs" || yoe === "5-10 yrs") 
+                    {
+                    
+                    if (future_goal === "3a"){
+                        addRecommendation("Advanced ML", "ML Flagship Course");} 
+                    else if (future_goal === "3c"){
+                        addRecommendation("Advanced Gen AI", "Applied Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "Advanced ML");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                    } 
+                    else if (yoe === "10-15 yrs" || yoe === "15-20 yrs")
+                    { 
+                    if (future_goal === "3a") {
+                        addRecommendation("ML Flagship Course", "Advanced ML");
+                    } else if (future_goal === "3c") {
+                        addRecommendation("Advanced Gen AI", "Applied Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "ML Flagship");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                    
+                    }
+                }
+
+                if (role === "Data Analyst & Business Analyst") 
+                {
+                    if (yoe === "0-5 yrs" || yoe === "5-10 yrs") 
+                    {
+                    
+                    if (future_goal === "3a"){
+                        addRecommendation("DS SwitchUp", "ML Flagship Course");} 
+                    else if (future_goal === "3c"){
+                        addRecommendation("Advanced Gen AI", "Applied Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "DS SwitchUp");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                    } 
+                    else if (yoe === "10-15 yrs" || yoe === "15-20 yrs")
+                    { 
+                    if (future_goal === "3a") {
+                        addRecommendation("ML Flagship Course", "DS SwitchUp");
+                    } else if (future_goal === "3c") {
+                        addRecommendation("Advanced Gen AI", "Applied Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "ML Flagship");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                    
+                    }
+                }
+
+                if (role === "Technical Program Manager" || role === "Product Manager (Tech)") 
+                {
+                    if (yoe === "0-5 yrs" || yoe === "5-10 yrs" || yoe === "10-15 yrs") 
+                    {
+                    
+                    if (future_goal === "3a"){
+                        addRecommendation("ML Flagship Course");} 
+                    else if (future_goal === "3c"){
+                        addRecommendation("Applied Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI",);
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "ML Flagship Course");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                    } 
+                    else if (yoe === "15-20 yrs")
+                    { 
+                    if (future_goal === "3a") {
+                        addRecommendation("EdgeUp", "ML Flagship");
+                    } else if (future_goal === "3c") {
+                        addRecommendation("Applied Gen AI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied Gen AI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("EdgeUp", "DS SwitchUp");
+                    }
+                    
+                    }
+                }
                 
 
-                if (role === "Technical Program Manager" || role === "Product Manager (Tech)" || role === "Engineering Manager") {
+                /*if (role === "Technical Program Manager" || role === "Product Manager (Tech)" || role === "Engineering Manager") {
                     if (future_goal === "3a" || future_goal === "3b") {
                         if (duration === "3-6 months") {
-                            addRecommendation("ML Flagship", "Advanced ML");
+                            addRecommendation("ML Flagship");
                         } else if (duration === "6-9 months") {
-                            if (yoe === "15+ yrs") {
-                                addRecommendation("EdgeUp", "Advanced ML");
+                            if (yoe === "15-20 yrs" || yoe === "20+yrs") {
+                                addRecommendation("EdgeUp");
                             } else {
-                                addRecommendation("ML Flagship Course", "Advanced ML");
+                                addRecommendation("EdgeUp");
                             }
                         } else if (duration === "12 months") {
                             addRecommendation("DS SwitchUp", "ML Flagship Course");
@@ -426,10 +534,10 @@
                         if (duration === "12 months" && yoe === "5-10 yrs") {
                             addRecommendation("EdgeUp", "ML Flagship Course");
                         } else {
-                            addRecommendation("Applied Gen AI");
+                            addRecommendation("Applied GenAI");
                         }
                     } else if (future_goal === "3d") {
-                        addRecommendation("Applied Gen AI", "EdgeUp");
+                        addRecommendation("Applied GenAI", "EdgeUp");
                     } else if (future_goal === "3e") {
                         addRecommendation("EdgeUp", "ML Flagship Course");
                     } else if (future_goal === "3f") {
@@ -437,28 +545,64 @@
                             addRecommendation("EdgeUp", "ML Flagship Course");
                         } else if (duration === "6-9 months") {
                             addRecommendation("ML Flagship Course", "Advanced ML");
-                                                } else if (duration === "12 months") {
+                        } else if (duration === "12 months") {
                             addRecommendation("DS SwitchUp", "EdgeUp");
                         }
                     }
-                }
+                }*/
 
-                if (role === "AWS Cloud Solutions Architect" || role === "Mobile Engineering (iOS/Android)") {
+                /*if (role === "AWS Cloud Solutions Architect" || role === "Mobile Engineering (iOS/Android)") {
                     if (future_goal === "3a" || future_goal === "3b") {
                         addRecommendation("ML Flagship Course", "Advanced ML");
                     } else if (future_goal === "3c") {
-                        addRecommendation("Advanced Gen AI", "Applied Gen AI");
+                        addRecommendation("Advanced Gen AI", "Applied GenAI");
                     } else if (future_goal === "3d") {
-                        addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                        addRecommendation("Applied GenAI", "Advanced Gen AI");
                     } else if (future_goal === "3e") {
                         addRecommendation("EdgeUp", "Advanced ML");
                     } else if (future_goal === "3f") {
                         addRecommendation("DS SwitchUp", "EdgeUp");
                     }
+                }*/
+
+                
+
+                if (role === "AWS Cloud Solutions Architect" || role === "Mobile Engineering (iOS/Android)") 
+                {
+                    if (yoe === "0-5 yrs" || yoe === "5-10 yrs") 
+                    {
+                    
+                    if (future_goal === "3a"){
+                        addRecommendation("ML Flagship Course", "Advanced ML");} 
+                    else if (future_goal === "3c"){
+                        addRecommendation("Applied GenAI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied GenAI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "Advanced ML");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                    } 
+                    else if (yoe === "15-20 yrs")
+                    { 
+                    if (future_goal === "3a") {
+                        addRecommendation("EdgeUp","ML Flagship Course");
+                    } else if (future_goal === "3c") {
+                        addRecommendation("Applied GenAI");
+                    } else if (future_goal === "3d") {
+                        addRecommendation("Applied GenAI");
+                    } else if (future_goal === "3e") {
+                        addRecommendation("EdgeUp", "ML Flagship Course");
+                    } else if (future_goal === "3f") {
+                        addRecommendation("DS SwitchUp", "EdgeUp");
+                    }
+                    
+                    }
                 }
 
                 if (role === "Cyber Security/Security Engineering" || role === "Site Reliability Engineering" || role === "Embedded Systems") {
-                    if (yoe > 15) {
+                    if (yoe === "10-15 yrs" || yoe === "15-20 yrs" || yoe === "20+ yrs") {
                         addRecommendation("EdgeUp");
                     } else {
                         if (future_goal === "3a") {
@@ -466,9 +610,9 @@
                         } else if (future_goal === "3b") {
                             addRecommendation("ML Flagship Course", "Advanced ML");
                         } else if (future_goal === "3c") {
-                            addRecommendation("Advanced Gen AI", "Applied Gen AI");
+                            addRecommendation("Advanced Gen AI", "Applied GenAI");
                         } else if (future_goal === "3d") {
-                            addRecommendation("Applied Gen AI", "Advanced Gen AI");
+                            addRecommendation("Applied GenAI", "Advanced Gen AI");
                         } else if (future_goal === "3e") {
                             addRecommendation("EdgeUp", "Advanced ML");
                         } else if (future_goal === "3f") {
@@ -477,18 +621,19 @@
                     }
                 }
 
+
                 if (role === "CRM/ERP Developer" || role === "STEM Background"  || role === "Tech Consultants/IT Consultants") {
-                    if (yoe > 10) {
-                        addRecommendation("Applied GenAI");
-                    } else {
+                    if (yoe === "10-15 yrs" || yoe === "15-20 yrs" || yoe === "20+ yrs") {
+                            addRecommendation("Applied GenAI");
+                        } else {
                         if (future_goal === "3a") {
                             addRecommendation("ML Flagship Course","DS SwitchUp");
                         } else if (future_goal === "3b") {
                             addRecommendation("ML Flagship Course","DS SwitchUp");
                         } else if (future_goal === "3c") {
-                            addRecommendation("Applied Gen AI");
+                            addRecommendation("Applied GenAI");
                         } else if (future_goal === "3d") {
-                            addRecommendation("Applied Gen AI");
+                            addRecommendation("Applied GenAI");
                         } else if (future_goal === "3e") {
                             addRecommendation("Applied GenAI");
                         } else if (future_goal === "3f") {
@@ -497,25 +642,25 @@
                     }
                 }
 
-            if (role === "Functional Consultants") {
-                if (yoe > 5) {
-                    addRecommendation("Applied GenAI");
-                } else {
-                    if (future_goal === "3a") {
-                        addRecommendation("ML Flagship Course","DS SwitchUp");
-                    } else if (future_goal === "3b") {
-                        addRecommendation("ML Flagship Course","DS SwitchUp");
-                    } else if (future_goal === "3c") {
-                        addRecommendation("Applied Gen AI");
-                    } else if (future_goal === "3d") {
-                        addRecommendation("Applied Gen AI");
-                    } else if (future_goal === "3e") {
+                if (role === "Functional Consultants") {
+                    if (yoe === "5-10 yrs" || yoe === "10-15 yrs" || yoe === "15-20 yrs" || yoe === "20+ yrs") {
                         addRecommendation("Applied GenAI");
-                    } else if (future_goal === "3f") {
-                        addRecommendation("DS SwitchUp", "Applied GenAI");
+                    } else {
+                        if (future_goal === "3a") {
+                            addRecommendation("ML Flagship Course","DS SwitchUp");
+                        } else if (future_goal === "3b") {
+                            addRecommendation("ML Flagship Course","DS SwitchUp");
+                        } else if (future_goal === "3c") {
+                            addRecommendation("Applied GenAI");
+                        } else if (future_goal === "3d") {
+                            addRecommendation("Applied GenAI");
+                        } else if (future_goal === "3e") {
+                            addRecommendation("Applied GenAI");
+                        } else if (future_goal === "3f") {
+                            addRecommendation("DS SwitchUp", "Applied GenAI");
+                        }
                     }
                 }
-            }
 
                 if (recommendations.length === 0) {
                     if (duration === "3-6 months") {
@@ -528,25 +673,38 @@
                 }
             }
 
+            console.log("Final recommendations: ", recommendations);
             return recommendations;
         }
 
         function displayRecommendation(recommendations, duration) {
-            const recommendedCoursesDiv = document.getElementById('recommended-courses');
-            recommendedCoursesDiv.innerHTML = '';
+        const recommendedCoursesDiv = document.getElementById('recommended-courses');
+        recommendedCoursesDiv.innerHTML = '';
 
-            const timeline = {
-                "EdgeUp": "3-6 months",
-                "Advanced ML": "12 months",
-                "ML Flagship Course": "6-9 months",
-                "Advanced Gen AI": "6-9 months",
-                "Applied Gen AI": "6-9 months",
-                "DS SwitchUp": "12 months"
-            };
+        const timeline = {
+            "EdgeUp": "3-6 months",
+            "Advanced ML": "12 months",
+            "ML Flagship Course": "6-9 months",
+            "Advanced Gen AI": "6-9 months",
+            "Applied GenAI": "6-9 months",
+            "DS SwitchUp": "12 months"
+        };
 
+        console.log("Displaying recommendations: ", recommendations); // Add this line for debugging
+
+        if (recommendations.length === 0) {
+            console.log("No recommendations to display.");
+            recommendedCoursesDiv.innerHTML = '<p>No courses available based on your selections.</p>';
+        } else {
             recommendations.forEach((course, index) => {
                 const courseDetails = courses[course];
                 if (courseDetails) {
+                    if (index === 1) {
+                        const alternativeElement = document.createElement('p');
+                        alternativeElement.innerHTML = `Alternatively, you may also consider:`;
+                        recommendedCoursesDiv.appendChild(alternativeElement);
+                    }
+
                     const courseElement = document.createElement('div');
                     courseElement.classList.add('program');
                     courseElement.innerHTML = `
@@ -555,20 +713,14 @@
                         <p><strong>Duration:</strong> ${timeline[course]}</p>
                         <button onclick="window.open('${courseDetails.link}', '_blank')">View Course</button>
                     `;
-                    if (index === 0) {
-                        recommendedCoursesDiv.appendChild(courseElement);
-                    } else {
-                        const alternativeElement = document.createElement('p');
-                        alternativeElement.innerHTML = `Alternatively, you may also consider:`;
-                        recommendedCoursesDiv.appendChild(alternativeElement);
-                        recommendedCoursesDiv.appendChild(courseElement);
-                    }
+                    recommendedCoursesDiv.appendChild(courseElement);
                 }
             });
-
-            const timelineText = timeline[recommendations[0]] || duration;
-            document.getElementById('timeline').innerText = timelineText;
         }
+
+        const timelineText = timeline[recommendations[0]] || duration;
+        document.getElementById('timeline').innerText = timelineText;
+    }
 
         function restartQuiz() {
             document.querySelectorAll('.step').forEach(function (element) {
